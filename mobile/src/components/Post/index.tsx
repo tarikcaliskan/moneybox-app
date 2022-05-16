@@ -90,6 +90,7 @@ export const Post: React.FC<PostProps> = ({ postId, index }) => {
 	const { data, loading, refetch } = useGetPostByIdQuery({ variables: { userId: loggedInUser?.id, id: postId } });
 	const post = data?.post;
 	const user = data?.post?.user;
+	const isMe = user?.id === loggedInUser?.id;
 	const isLiked = Boolean(post?.myLike[0]?.id);
 
 	const { data: walletData } = useGetPostUserWalletQuery({ variables: { userId: user?.id } });
@@ -157,10 +158,12 @@ export const Post: React.FC<PostProps> = ({ postId, index }) => {
 					<Feather name="thumbs-up" size={24} color={isLiked ? colors.green500 : colors.gray700} />
 					<Text style={[styles.likeText, { color: isLiked ? colors.green500 : colors.gray700 }]}>Beğen</Text>
 				</TouchableOpacity>
-				<TouchableOpacity onPress={onPressReward} style={styles.prizeWrapper}>
-					<Image style={styles.coinIcon} source={CoinImage} />
-					<Text style={styles.prizeText}>Ödül (5 p.)</Text>
-				</TouchableOpacity>
+				{!isMe && (
+					<TouchableOpacity onPress={onPressReward} style={styles.prizeWrapper}>
+						<Image style={styles.coinIcon} source={CoinImage} />
+						<Text style={styles.prizeText}>Ödül (5 p.)</Text>
+					</TouchableOpacity>
+				)}
 			</View>
 		</View>
 	);
@@ -221,8 +224,6 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'center',
-		borderRightWidth: 2,
-		borderRightColor: colors.gray300,
 	},
 	likeText: {
 		fontSize: 14,
@@ -230,6 +231,8 @@ const styles = StyleSheet.create({
 		marginLeft: 12,
 	},
 	prizeWrapper: {
+		borderLeftWidth: 2,
+		borderLeftColor: colors.gray300,
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'center',
