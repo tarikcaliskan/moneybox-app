@@ -6,6 +6,8 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "nodemon --exec ts-node ./src/app.ts",
+		"build": "tsc",
+		"start": "node ./dist/src/app.js",
 		"generate": "graphql-codegen --config codegen.yml -r dotenv/config"
 	},
 	"keywords": [],
