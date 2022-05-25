@@ -14,6 +14,19 @@ export type Scalars = {
   uuid: any;
 };
 
+/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
+export type Boolean_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['Boolean']>;
+  _gt?: InputMaybe<Scalars['Boolean']>;
+  _gte?: InputMaybe<Scalars['Boolean']>;
+  _in?: InputMaybe<Array<Scalars['Boolean']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['Boolean']>;
+  _lte?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Scalars['Boolean']>;
+  _nin?: InputMaybe<Array<Scalars['Boolean']>>;
+};
+
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['Int']>;
@@ -92,9 +105,177 @@ export type String_Comparison_Exp = {
   _similar?: InputMaybe<Scalars['String']>;
 };
 
+/** columns and relationships of "likes" */
+export type Likes = {
+  __typename?: 'likes';
+  id: Scalars['uuid'];
+  /** An object relationship */
+  post: Posts;
+  postId: Scalars['uuid'];
+  /** An object relationship */
+  user: User;
+  userId: Scalars['uuid'];
+};
+
+/** aggregated selection of "likes" */
+export type Likes_Aggregate = {
+  __typename?: 'likes_aggregate';
+  aggregate?: Maybe<Likes_Aggregate_Fields>;
+  nodes: Array<Likes>;
+};
+
+/** aggregate fields of "likes" */
+export type Likes_Aggregate_Fields = {
+  __typename?: 'likes_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Likes_Max_Fields>;
+  min?: Maybe<Likes_Min_Fields>;
+};
+
+
+/** aggregate fields of "likes" */
+export type Likes_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Likes_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "likes" */
+export type Likes_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Likes_Max_Order_By>;
+  min?: InputMaybe<Likes_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "likes" */
+export type Likes_Arr_Rel_Insert_Input = {
+  data: Array<Likes_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Likes_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "likes". All fields are combined with a logical 'AND'. */
+export type Likes_Bool_Exp = {
+  _and?: InputMaybe<Array<Likes_Bool_Exp>>;
+  _not?: InputMaybe<Likes_Bool_Exp>;
+  _or?: InputMaybe<Array<Likes_Bool_Exp>>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  post?: InputMaybe<Posts_Bool_Exp>;
+  postId?: InputMaybe<Uuid_Comparison_Exp>;
+  user?: InputMaybe<User_Bool_Exp>;
+  userId?: InputMaybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "likes" */
+export enum Likes_Constraint {
+  /** unique or primary key constraint */
+  LikesPkey = 'likes_pkey',
+  /** unique or primary key constraint */
+  LikesUserIdPostIdKey = 'likes_userId_postId_key'
+}
+
+/** input type for inserting data into table "likes" */
+export type Likes_Insert_Input = {
+  id?: InputMaybe<Scalars['uuid']>;
+  post?: InputMaybe<Posts_Obj_Rel_Insert_Input>;
+  postId?: InputMaybe<Scalars['uuid']>;
+  user?: InputMaybe<User_Obj_Rel_Insert_Input>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate max on columns */
+export type Likes_Max_Fields = {
+  __typename?: 'likes_max_fields';
+  id?: Maybe<Scalars['uuid']>;
+  postId?: Maybe<Scalars['uuid']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by max() on columns of table "likes" */
+export type Likes_Max_Order_By = {
+  id?: InputMaybe<Order_By>;
+  postId?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Likes_Min_Fields = {
+  __typename?: 'likes_min_fields';
+  id?: Maybe<Scalars['uuid']>;
+  postId?: Maybe<Scalars['uuid']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "likes" */
+export type Likes_Min_Order_By = {
+  id?: InputMaybe<Order_By>;
+  postId?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "likes" */
+export type Likes_Mutation_Response = {
+  __typename?: 'likes_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Likes>;
+};
+
+/** on_conflict condition type for table "likes" */
+export type Likes_On_Conflict = {
+  constraint: Likes_Constraint;
+  update_columns?: Array<Likes_Update_Column>;
+  where?: InputMaybe<Likes_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "likes". */
+export type Likes_Order_By = {
+  id?: InputMaybe<Order_By>;
+  post?: InputMaybe<Posts_Order_By>;
+  postId?: InputMaybe<Order_By>;
+  user?: InputMaybe<User_Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: likes */
+export type Likes_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "likes" */
+export enum Likes_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PostId = 'postId',
+  /** column name */
+  UserId = 'userId'
+}
+
+/** input type for updating data in table "likes" */
+export type Likes_Set_Input = {
+  id?: InputMaybe<Scalars['uuid']>;
+  postId?: InputMaybe<Scalars['uuid']>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** update columns of table "likes" */
+export enum Likes_Update_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PostId = 'postId',
+  /** column name */
+  UserId = 'userId'
+}
+
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "likes" */
+  delete_likes?: Maybe<Likes_Mutation_Response>;
+  /** delete single row from the table: "likes" */
+  delete_likes_by_pk?: Maybe<Likes>;
   /** delete data from the table: "posts" */
   delete_posts?: Maybe<Posts_Mutation_Response>;
   /** delete single row from the table: "posts" */
@@ -115,6 +296,10 @@ export type Mutation_Root = {
   delete_wallet?: Maybe<Wallet_Mutation_Response>;
   /** delete single row from the table: "wallet" */
   delete_wallet_by_pk?: Maybe<Wallet>;
+  /** insert data into the table: "likes" */
+  insert_likes?: Maybe<Likes_Mutation_Response>;
+  /** insert a single row into the table: "likes" */
+  insert_likes_one?: Maybe<Likes>;
   /** insert data into the table: "posts" */
   insert_posts?: Maybe<Posts_Mutation_Response>;
   /** insert a single row into the table: "posts" */
@@ -141,6 +326,10 @@ export type Mutation_Root = {
   logout?: Maybe<LogoutOutput>;
   /** register */
   register?: Maybe<RegisterOutput>;
+  /** update data of the table: "likes" */
+  update_likes?: Maybe<Likes_Mutation_Response>;
+  /** update single row of the table: "likes" */
+  update_likes_by_pk?: Maybe<Likes>;
   /** update data of the table: "posts" */
   update_posts?: Maybe<Posts_Mutation_Response>;
   /** update single row of the table: "posts" */
@@ -161,6 +350,18 @@ export type Mutation_Root = {
   update_wallet?: Maybe<Wallet_Mutation_Response>;
   /** update single row of the table: "wallet" */
   update_wallet_by_pk?: Maybe<Wallet>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_LikesArgs = {
+  where: Likes_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Likes_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -221,6 +422,20 @@ export type Mutation_RootDelete_WalletArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Wallet_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_LikesArgs = {
+  objects: Array<Likes_Insert_Input>;
+  on_conflict?: InputMaybe<Likes_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Likes_OneArgs = {
+  object: Likes_Insert_Input;
+  on_conflict?: InputMaybe<Likes_On_Conflict>;
 };
 
 
@@ -313,8 +528,21 @@ export type Mutation_RootRegisterArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_LikesArgs = {
+  _set?: InputMaybe<Likes_Set_Input>;
+  where: Likes_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Likes_By_PkArgs = {
+  _set?: InputMaybe<Likes_Set_Input>;
+  pk_columns: Likes_Pk_Columns_Input;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_PostsArgs = {
-  _inc?: InputMaybe<Posts_Inc_Input>;
   _set?: InputMaybe<Posts_Set_Input>;
   where: Posts_Bool_Exp;
 };
@@ -322,7 +550,6 @@ export type Mutation_RootUpdate_PostsArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Posts_By_PkArgs = {
-  _inc?: InputMaybe<Posts_Inc_Input>;
   _set?: InputMaybe<Posts_Set_Input>;
   pk_columns: Posts_Pk_Columns_Input;
 };
@@ -407,9 +634,34 @@ export type Posts = {
   createdAt: Scalars['timestamptz'];
   id: Scalars['uuid'];
   imageUrl?: Maybe<Scalars['String']>;
-  likes: Scalars['Int'];
+  /** An array relationship */
+  likes: Array<Likes>;
+  /** An aggregate relationship */
+  likes_aggregate: Likes_Aggregate;
   text: Scalars['String'];
+  /** An object relationship */
+  user: User;
   userId: Scalars['uuid'];
+};
+
+
+/** columns and relationships of "posts" */
+export type PostsLikesArgs = {
+  distinct_on?: InputMaybe<Array<Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Likes_Order_By>>;
+  where?: InputMaybe<Likes_Bool_Exp>;
+};
+
+
+/** columns and relationships of "posts" */
+export type PostsLikes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Likes_Order_By>>;
+  where?: InputMaybe<Likes_Bool_Exp>;
 };
 
 /** aggregated selection of "posts" */
@@ -422,17 +674,9 @@ export type Posts_Aggregate = {
 /** aggregate fields of "posts" */
 export type Posts_Aggregate_Fields = {
   __typename?: 'posts_aggregate_fields';
-  avg?: Maybe<Posts_Avg_Fields>;
   count: Scalars['Int'];
   max?: Maybe<Posts_Max_Fields>;
   min?: Maybe<Posts_Min_Fields>;
-  stddev?: Maybe<Posts_Stddev_Fields>;
-  stddev_pop?: Maybe<Posts_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Posts_Stddev_Samp_Fields>;
-  sum?: Maybe<Posts_Sum_Fields>;
-  var_pop?: Maybe<Posts_Var_Pop_Fields>;
-  var_samp?: Maybe<Posts_Var_Samp_Fields>;
-  variance?: Maybe<Posts_Variance_Fields>;
 };
 
 
@@ -442,10 +686,18 @@ export type Posts_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
-/** aggregate avg on columns */
-export type Posts_Avg_Fields = {
-  __typename?: 'posts_avg_fields';
-  likes?: Maybe<Scalars['Float']>;
+/** order by aggregate values of table "posts" */
+export type Posts_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Posts_Max_Order_By>;
+  min?: InputMaybe<Posts_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "posts" */
+export type Posts_Arr_Rel_Insert_Input = {
+  data: Array<Posts_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Posts_On_Conflict>;
 };
 
 /** Boolean expression to filter rows from the table "posts". All fields are combined with a logical 'AND'. */
@@ -456,8 +708,9 @@ export type Posts_Bool_Exp = {
   createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   imageUrl?: InputMaybe<String_Comparison_Exp>;
-  likes?: InputMaybe<Int_Comparison_Exp>;
+  likes?: InputMaybe<Likes_Bool_Exp>;
   text?: InputMaybe<String_Comparison_Exp>;
+  user?: InputMaybe<User_Bool_Exp>;
   userId?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
@@ -467,18 +720,14 @@ export enum Posts_Constraint {
   PostPkey = 'post_pkey'
 }
 
-/** input type for incrementing numeric columns in table "posts" */
-export type Posts_Inc_Input = {
-  likes?: InputMaybe<Scalars['Int']>;
-};
-
 /** input type for inserting data into table "posts" */
 export type Posts_Insert_Input = {
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   imageUrl?: InputMaybe<Scalars['String']>;
-  likes?: InputMaybe<Scalars['Int']>;
+  likes?: InputMaybe<Likes_Arr_Rel_Insert_Input>;
   text?: InputMaybe<Scalars['String']>;
+  user?: InputMaybe<User_Obj_Rel_Insert_Input>;
   userId?: InputMaybe<Scalars['uuid']>;
 };
 
@@ -488,9 +737,17 @@ export type Posts_Max_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   imageUrl?: Maybe<Scalars['String']>;
-  likes?: Maybe<Scalars['Int']>;
   text?: Maybe<Scalars['String']>;
   userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by max() on columns of table "posts" */
+export type Posts_Max_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  imageUrl?: InputMaybe<Order_By>;
+  text?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -499,9 +756,17 @@ export type Posts_Min_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   imageUrl?: Maybe<Scalars['String']>;
-  likes?: Maybe<Scalars['Int']>;
   text?: Maybe<Scalars['String']>;
   userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "posts" */
+export type Posts_Min_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  imageUrl?: InputMaybe<Order_By>;
+  text?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "posts" */
@@ -511,6 +776,13 @@ export type Posts_Mutation_Response = {
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Posts>;
+};
+
+/** input type for inserting object relation for remote table "posts" */
+export type Posts_Obj_Rel_Insert_Input = {
+  data: Posts_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Posts_On_Conflict>;
 };
 
 /** on_conflict condition type for table "posts" */
@@ -525,8 +797,9 @@ export type Posts_Order_By = {
   createdAt?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   imageUrl?: InputMaybe<Order_By>;
-  likes?: InputMaybe<Order_By>;
+  likes_aggregate?: InputMaybe<Likes_Aggregate_Order_By>;
   text?: InputMaybe<Order_By>;
+  user?: InputMaybe<User_Order_By>;
   userId?: InputMaybe<Order_By>;
 };
 
@@ -544,8 +817,6 @@ export enum Posts_Select_Column {
   /** column name */
   ImageUrl = 'imageUrl',
   /** column name */
-  Likes = 'likes',
-  /** column name */
   Text = 'text',
   /** column name */
   UserId = 'userId'
@@ -556,33 +827,8 @@ export type Posts_Set_Input = {
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   imageUrl?: InputMaybe<Scalars['String']>;
-  likes?: InputMaybe<Scalars['Int']>;
   text?: InputMaybe<Scalars['String']>;
   userId?: InputMaybe<Scalars['uuid']>;
-};
-
-/** aggregate stddev on columns */
-export type Posts_Stddev_Fields = {
-  __typename?: 'posts_stddev_fields';
-  likes?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Posts_Stddev_Pop_Fields = {
-  __typename?: 'posts_stddev_pop_fields';
-  likes?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Posts_Stddev_Samp_Fields = {
-  __typename?: 'posts_stddev_samp_fields';
-  likes?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Posts_Sum_Fields = {
-  __typename?: 'posts_sum_fields';
-  likes?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "posts" */
@@ -594,36 +840,22 @@ export enum Posts_Update_Column {
   /** column name */
   ImageUrl = 'imageUrl',
   /** column name */
-  Likes = 'likes',
-  /** column name */
   Text = 'text',
   /** column name */
   UserId = 'userId'
 }
 
-/** aggregate var_pop on columns */
-export type Posts_Var_Pop_Fields = {
-  __typename?: 'posts_var_pop_fields';
-  likes?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Posts_Var_Samp_Fields = {
-  __typename?: 'posts_var_samp_fields';
-  likes?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Posts_Variance_Fields = {
-  __typename?: 'posts_variance_fields';
-  likes?: Maybe<Scalars['Float']>;
-};
-
 export type Query_Root = {
   __typename?: 'query_root';
-  /** fetch data from the table: "posts" */
+  /** An array relationship */
+  likes: Array<Likes>;
+  /** An aggregate relationship */
+  likes_aggregate: Likes_Aggregate;
+  /** fetch data from the table: "likes" using primary key columns */
+  likes_by_pk?: Maybe<Likes>;
+  /** An array relationship */
   posts: Array<Posts>;
-  /** fetch aggregated fields from the table: "posts" */
+  /** An aggregate relationship */
   posts_aggregate: Posts_Aggregate;
   /** fetch data from the table: "posts" using primary key columns */
   posts_by_pk?: Maybe<Posts>;
@@ -651,6 +883,29 @@ export type Query_Root = {
   wallet_aggregate: Wallet_Aggregate;
   /** fetch data from the table: "wallet" using primary key columns */
   wallet_by_pk?: Maybe<Wallet>;
+};
+
+
+export type Query_RootLikesArgs = {
+  distinct_on?: InputMaybe<Array<Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Likes_Order_By>>;
+  where?: InputMaybe<Likes_Bool_Exp>;
+};
+
+
+export type Query_RootLikes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Likes_Order_By>>;
+  where?: InputMaybe<Likes_Bool_Exp>;
+};
+
+
+export type Query_RootLikes_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -770,9 +1025,15 @@ export type Query_RootWallet_By_PkArgs = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
-  /** fetch data from the table: "posts" */
+  /** An array relationship */
+  likes: Array<Likes>;
+  /** An aggregate relationship */
+  likes_aggregate: Likes_Aggregate;
+  /** fetch data from the table: "likes" using primary key columns */
+  likes_by_pk?: Maybe<Likes>;
+  /** An array relationship */
   posts: Array<Posts>;
-  /** fetch aggregated fields from the table: "posts" */
+  /** An aggregate relationship */
   posts_aggregate: Posts_Aggregate;
   /** fetch data from the table: "posts" using primary key columns */
   posts_by_pk?: Maybe<Posts>;
@@ -800,6 +1061,29 @@ export type Subscription_Root = {
   wallet_aggregate: Wallet_Aggregate;
   /** fetch data from the table: "wallet" using primary key columns */
   wallet_by_pk?: Maybe<Wallet>;
+};
+
+
+export type Subscription_RootLikesArgs = {
+  distinct_on?: InputMaybe<Array<Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Likes_Order_By>>;
+  where?: InputMaybe<Likes_Bool_Exp>;
+};
+
+
+export type Subscription_RootLikes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Likes_Order_By>>;
+  where?: InputMaybe<Likes_Bool_Exp>;
+};
+
+
+export type Subscription_RootLikes_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -933,11 +1217,85 @@ export type Timestamptz_Comparison_Exp = {
 /** columns and relationships of "user" */
 export type User = {
   __typename?: 'user';
+  /** An array relationship */
+  connectedRelationships: Array<User_Relationship>;
+  /** An aggregate relationship */
+  connectedRelationships_aggregate: User_Relationship_Aggregate;
   email: Scalars['String'];
   fullName: Scalars['String'];
   id: Scalars['uuid'];
   imageUrl?: Maybe<Scalars['String']>;
   password: Scalars['String'];
+  /** An array relationship */
+  posts: Array<Posts>;
+  /** An aggregate relationship */
+  posts_aggregate: Posts_Aggregate;
+  /** An array relationship */
+  relationships: Array<User_Relationship>;
+  /** An aggregate relationship */
+  relationships_aggregate: User_Relationship_Aggregate;
+  /** An object relationship */
+  wallet?: Maybe<Wallet>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserConnectedRelationshipsArgs = {
+  distinct_on?: InputMaybe<Array<User_Relationship_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Relationship_Order_By>>;
+  where?: InputMaybe<User_Relationship_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserConnectedRelationships_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<User_Relationship_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Relationship_Order_By>>;
+  where?: InputMaybe<User_Relationship_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserPostsArgs = {
+  distinct_on?: InputMaybe<Array<Posts_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Posts_Order_By>>;
+  where?: InputMaybe<Posts_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserPosts_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Posts_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Posts_Order_By>>;
+  where?: InputMaybe<Posts_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserRelationshipsArgs = {
+  distinct_on?: InputMaybe<Array<User_Relationship_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Relationship_Order_By>>;
+  where?: InputMaybe<User_Relationship_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserRelationships_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<User_Relationship_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Relationship_Order_By>>;
+  where?: InputMaybe<User_Relationship_Bool_Exp>;
 };
 
 /** aggregated selection of "user" */
@@ -967,11 +1325,15 @@ export type User_Bool_Exp = {
   _and?: InputMaybe<Array<User_Bool_Exp>>;
   _not?: InputMaybe<User_Bool_Exp>;
   _or?: InputMaybe<Array<User_Bool_Exp>>;
+  connectedRelationships?: InputMaybe<User_Relationship_Bool_Exp>;
   email?: InputMaybe<String_Comparison_Exp>;
   fullName?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   imageUrl?: InputMaybe<String_Comparison_Exp>;
   password?: InputMaybe<String_Comparison_Exp>;
+  posts?: InputMaybe<Posts_Bool_Exp>;
+  relationships?: InputMaybe<User_Relationship_Bool_Exp>;
+  wallet?: InputMaybe<Wallet_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "user" */
@@ -984,11 +1346,15 @@ export enum User_Constraint {
 
 /** input type for inserting data into table "user" */
 export type User_Insert_Input = {
+  connectedRelationships?: InputMaybe<User_Relationship_Arr_Rel_Insert_Input>;
   email?: InputMaybe<Scalars['String']>;
   fullName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   imageUrl?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
+  posts?: InputMaybe<Posts_Arr_Rel_Insert_Input>;
+  relationships?: InputMaybe<User_Relationship_Arr_Rel_Insert_Input>;
+  wallet?: InputMaybe<Wallet_Obj_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -1020,6 +1386,13 @@ export type User_Mutation_Response = {
   returning: Array<User>;
 };
 
+/** input type for inserting object relation for remote table "user" */
+export type User_Obj_Rel_Insert_Input = {
+  data: User_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<User_On_Conflict>;
+};
+
 /** on_conflict condition type for table "user" */
 export type User_On_Conflict = {
   constraint: User_Constraint;
@@ -1029,11 +1402,15 @@ export type User_On_Conflict = {
 
 /** Ordering options when selecting data from "user". */
 export type User_Order_By = {
+  connectedRelationships_aggregate?: InputMaybe<User_Relationship_Aggregate_Order_By>;
   email?: InputMaybe<Order_By>;
   fullName?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   imageUrl?: InputMaybe<Order_By>;
   password?: InputMaybe<Order_By>;
+  posts_aggregate?: InputMaybe<Posts_Aggregate_Order_By>;
+  relationships_aggregate?: InputMaybe<User_Relationship_Aggregate_Order_By>;
+  wallet?: InputMaybe<Wallet_Order_By>;
 };
 
 /** primary key columns input for table: user */
@@ -1044,10 +1421,18 @@ export type User_Pk_Columns_Input = {
 /** columns and relationships of "user_relationship" */
 export type User_Relationship = {
   __typename?: 'user_relationship';
+  /** An object relationship */
+  connectedUser: User;
   connectedUserId: Scalars['uuid'];
   id: Scalars['uuid'];
+  rejected?: Maybe<Scalars['Boolean']>;
   relationshipType: User_Relationship_Type_Enum;
+  /** An object relationship */
+  user: User;
   userId: Scalars['uuid'];
+  /** An object relationship */
+  userRelationshipType: User_Relationship_Type;
+  verified: Scalars['Boolean'];
 };
 
 /** aggregated selection of "user_relationship" */
@@ -1072,15 +1457,34 @@ export type User_Relationship_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "user_relationship" */
+export type User_Relationship_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<User_Relationship_Max_Order_By>;
+  min?: InputMaybe<User_Relationship_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "user_relationship" */
+export type User_Relationship_Arr_Rel_Insert_Input = {
+  data: Array<User_Relationship_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<User_Relationship_On_Conflict>;
+};
+
 /** Boolean expression to filter rows from the table "user_relationship". All fields are combined with a logical 'AND'. */
 export type User_Relationship_Bool_Exp = {
   _and?: InputMaybe<Array<User_Relationship_Bool_Exp>>;
   _not?: InputMaybe<User_Relationship_Bool_Exp>;
   _or?: InputMaybe<Array<User_Relationship_Bool_Exp>>;
+  connectedUser?: InputMaybe<User_Bool_Exp>;
   connectedUserId?: InputMaybe<Uuid_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  rejected?: InputMaybe<Boolean_Comparison_Exp>;
   relationshipType?: InputMaybe<User_Relationship_Type_Enum_Comparison_Exp>;
+  user?: InputMaybe<User_Bool_Exp>;
   userId?: InputMaybe<Uuid_Comparison_Exp>;
+  userRelationshipType?: InputMaybe<User_Relationship_Type_Bool_Exp>;
+  verified?: InputMaybe<Boolean_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "user_relationship" */
@@ -1093,10 +1497,15 @@ export enum User_Relationship_Constraint {
 
 /** input type for inserting data into table "user_relationship" */
 export type User_Relationship_Insert_Input = {
+  connectedUser?: InputMaybe<User_Obj_Rel_Insert_Input>;
   connectedUserId?: InputMaybe<Scalars['uuid']>;
   id?: InputMaybe<Scalars['uuid']>;
+  rejected?: InputMaybe<Scalars['Boolean']>;
   relationshipType?: InputMaybe<User_Relationship_Type_Enum>;
+  user?: InputMaybe<User_Obj_Rel_Insert_Input>;
   userId?: InputMaybe<Scalars['uuid']>;
+  userRelationshipType?: InputMaybe<User_Relationship_Type_Obj_Rel_Insert_Input>;
+  verified?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate max on columns */
@@ -1107,12 +1516,26 @@ export type User_Relationship_Max_Fields = {
   userId?: Maybe<Scalars['uuid']>;
 };
 
+/** order by max() on columns of table "user_relationship" */
+export type User_Relationship_Max_Order_By = {
+  connectedUserId?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type User_Relationship_Min_Fields = {
   __typename?: 'user_relationship_min_fields';
   connectedUserId?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
   userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "user_relationship" */
+export type User_Relationship_Min_Order_By = {
+  connectedUserId?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "user_relationship" */
@@ -1133,10 +1556,15 @@ export type User_Relationship_On_Conflict = {
 
 /** Ordering options when selecting data from "user_relationship". */
 export type User_Relationship_Order_By = {
+  connectedUser?: InputMaybe<User_Order_By>;
   connectedUserId?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  rejected?: InputMaybe<Order_By>;
   relationshipType?: InputMaybe<Order_By>;
+  user?: InputMaybe<User_Order_By>;
   userId?: InputMaybe<Order_By>;
+  userRelationshipType?: InputMaybe<User_Relationship_Type_Order_By>;
+  verified?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: user_relationship */
@@ -1151,17 +1579,23 @@ export enum User_Relationship_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  Rejected = 'rejected',
+  /** column name */
   RelationshipType = 'relationshipType',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
+  /** column name */
+  Verified = 'verified'
 }
 
 /** input type for updating data in table "user_relationship" */
 export type User_Relationship_Set_Input = {
   connectedUserId?: InputMaybe<Scalars['uuid']>;
   id?: InputMaybe<Scalars['uuid']>;
+  rejected?: InputMaybe<Scalars['Boolean']>;
   relationshipType?: InputMaybe<User_Relationship_Type_Enum>;
   userId?: InputMaybe<Scalars['uuid']>;
+  verified?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** columns and relationships of "user_relationship_type" */
@@ -1251,6 +1685,13 @@ export type User_Relationship_Type_Mutation_Response = {
   returning: Array<User_Relationship_Type>;
 };
 
+/** input type for inserting object relation for remote table "user_relationship_type" */
+export type User_Relationship_Type_Obj_Rel_Insert_Input = {
+  data: User_Relationship_Type_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<User_Relationship_Type_On_Conflict>;
+};
+
 /** on_conflict condition type for table "user_relationship_type" */
 export type User_Relationship_Type_On_Conflict = {
   constraint: User_Relationship_Type_Constraint;
@@ -1298,9 +1739,13 @@ export enum User_Relationship_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  Rejected = 'rejected',
+  /** column name */
   RelationshipType = 'relationshipType',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
+  /** column name */
+  Verified = 'verified'
 }
 
 /** select columns of table "user" */
@@ -1358,6 +1803,8 @@ export type Wallet = {
   __typename?: 'wallet';
   balance: Scalars['Int'];
   id: Scalars['uuid'];
+  /** An object relationship */
+  user: User;
   userId: Scalars['uuid'];
 };
 
@@ -1404,6 +1851,7 @@ export type Wallet_Bool_Exp = {
   _or?: InputMaybe<Array<Wallet_Bool_Exp>>;
   balance?: InputMaybe<Int_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  user?: InputMaybe<User_Bool_Exp>;
   userId?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
@@ -1424,6 +1872,7 @@ export type Wallet_Inc_Input = {
 export type Wallet_Insert_Input = {
   balance?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['uuid']>;
+  user?: InputMaybe<User_Obj_Rel_Insert_Input>;
   userId?: InputMaybe<Scalars['uuid']>;
 };
 
@@ -1452,6 +1901,13 @@ export type Wallet_Mutation_Response = {
   returning: Array<Wallet>;
 };
 
+/** input type for inserting object relation for remote table "wallet" */
+export type Wallet_Obj_Rel_Insert_Input = {
+  data: Wallet_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Wallet_On_Conflict>;
+};
+
 /** on_conflict condition type for table "wallet" */
 export type Wallet_On_Conflict = {
   constraint: Wallet_Constraint;
@@ -1463,6 +1919,7 @@ export type Wallet_On_Conflict = {
 export type Wallet_Order_By = {
   balance?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  user?: InputMaybe<User_Order_By>;
   userId?: InputMaybe<Order_By>;
 };
 
@@ -1552,4 +2009,4 @@ export type RegisterUserMutationVariables = Exact<{
 }>;
 
 
-export type RegisterUserMutation = { __typename?: 'mutation_root', user?: { __typename?: 'user', id: any, email: string, fullName: string } | null };
+export type RegisterUserMutation = { __typename?: 'mutation_root', user?: { __typename?: 'user', id: any, email: string, fullName: string, imageUrl?: string | null } | null };

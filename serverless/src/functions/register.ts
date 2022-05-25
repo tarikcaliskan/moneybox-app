@@ -34,6 +34,7 @@ const RegisterUser = gql`
 			id
 			email
 			fullName
+			imageUrl
 		}
 	}
 `;
@@ -79,7 +80,7 @@ export const register = async (req: HandlerRequest<RegisterInputArgs>, res: Hand
 		id: user.id,
 		email: user.email,
 		fullName: user.fullName,
-		imageUrl: loggedInUser.imageUrl,
+		imageUrl: user.imageUrl,
 		expiresIn: JWT_MAX_AGE,
 	};
 	const token = jwt.sign(jwtPayload, JWT_SECRET, { expiresIn: JWT_MAX_AGE });
